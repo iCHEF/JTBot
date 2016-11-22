@@ -200,7 +200,7 @@ controller.on('interactive_message_callback', function(bot, message) {
         bot.replyInteractive(message, {
           attachments: [
             {
-              title: 'The smoke testrail report',
+              title: 'You can click here to check report-The smoke testrail report',
               title_link: 'https://ichef.testrail.com/index.php?/runs/view/' + runId,
               color: '#001405',
               callback_id: 'sign',
@@ -233,7 +233,7 @@ controller.on('interactive_message_callback', function(bot, message) {
         bot.replyInteractive(message, {
           attachments: [
             {
-              title: 'The integration testrail report',
+              title: 'You can click here to check report-The integration testrail report',
               title_link: 'https://ichef.testrail.com/index.php?/runs/view/' + runId,
               color: '#001405',
               callback_id: 'sign',
@@ -262,7 +262,7 @@ controller.on('interactive_message_callback', function(bot, message) {
       bot.replyInteractive(message, {
       attachments: [
         {
-          title: 'The automation testrail report',
+          title: 'You can click here to check report-The automation testrail report',
           title_link: 'https://ichef.testrail.com/index.php?/runs/view/7',
           color: '#001405',
         }
