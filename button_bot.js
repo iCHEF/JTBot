@@ -4,7 +4,7 @@ var process = require('child_process');
 var TestRail = require('node-testrail');
 var json = require('./config.json');
 
-var testrail = new TestRail(json.url, json.account, json.passward);
+var testrail = new TestRail(json.url, json.account, json.password);
 var _bots = {};
 var version = null;
 var runId = null;
