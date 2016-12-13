@@ -9,6 +9,7 @@ var _bots = {};
 var version = null;
 var runId = null;
 var runName = null;
+var isRTMStarted = false;
 
 
 var controller = Botkit.slackbot({
@@ -28,8 +29,11 @@ function trackBot(bot) {
 
 function startRTM(bot) {
   bot.startRTM(function(err) {
-    if (!err) {
-      trackBot(bot);
+    if (err) {
+      throw new Error(err);
+    }
+    else {
+      isRTMStarted = true;
     }
   })
 }
@@ -47,9 +51,7 @@ controller.setupWebserver('3000', function(err, webserver) {
 })
 
 controller.on('create_bot', function(bot, config) {
-  if (_bots[bot.config.token]) {
-  }
-  else {
+ if (!isRTMStarted) {
     startRTM(bot)
   }
 })
@@ -349,6 +351,9 @@ function jenkinsResult(bot, message, jobName) {
           }
         ]
       })
+    }
+    else if (responce.statusCode === 404){
+      bot.replyInteractive(message, 'Jenkins is still building the job!')
     }
     else {
       bot.replyInteractive(message, 'Some things was error')
