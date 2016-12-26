@@ -18,6 +18,6 @@
 1. git clone slack-bot
 2. cd slack-bot
 3. npm init
-4. npm install --save botkit
-5. vim littlebot.js and paste the Client ID and Client Secret
+4. npm install
+5. vim button_bot.js and paste the Client ID and Client Secret
 6. job_url Insert your Jenkins's URL
