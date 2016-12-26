@@ -16,7 +16,7 @@
   },
   "homepage": "https://github.com/iCHEF/JTBot#readme",
   "dependencies": {
-    "botkit": "^0.4.2",
+    "botkit": "^0.4.5",
     "node-testrail": "0.0.12",
     "request": "^2.79.0"
   }
