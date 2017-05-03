@@ -9,7 +9,7 @@ var _bots = {};
 var version = null;
 var runId = null;
 var runName = null;
-var isRTMStarted = false;
+// var isRTMStarted = false;
 
 
 var controller = Botkit.slackbot({
@@ -29,12 +29,20 @@ function trackBot(bot) {
 
 function startRTM(bot) {
   bot.startRTM(function(err) {
-    if (err) {
-      throw new Error(err);
+    if (!err) {
+      trackBot(bot)
+      setTimeout(function() { bot.closeRTM() }, 21600000);
     }
-    else {
-      isRTMStarted = true;
+    else{
+      console.log(err)
     }
+    // if (err) {
+    //   console.log(err)
+    //   // throw new Error(err);
+    // }
+    // else {
+    //   isRTMStarted = true;
+    // }
   })
 }
 
@@ -51,9 +59,14 @@ controller.setupWebserver('3000', function(err, webserver) {
 })
 
 controller.on('create_bot', function(bot, config) {
- if (!isRTMStarted) {
+  if (_bots[bot.config.token]) {
+  }
+  else {
     startRTM(bot)
   }
+  // if (!isRTMStarted) {
+  //   startRTM(bot)
+  // }
 })
 
 controller.on('rtm_open', function(bot) {
@@ -304,9 +317,9 @@ controller.hears('','direct_message, direct_mention, mention', function (bot, me
   bot.reply(message,'If you want to build jenkins or check the test report, you can use help!')
 })
 
-controller.on('message_received', function(bot, message) {
-    bot.reply(message, 'You can use "help"')
-})
+// controller.on('message_received', function(bot, message) {
+//     bot.reply(message, 'You can use "help"')
+// })
 
 /*------------------------------------------------------------*/
 
@@ -356,7 +369,7 @@ function jenkinsResult(bot, message, jobName) {
       bot.replyInteractive(message, 'Jenkins is still building the job!')
     }
     else {
-      bot.replyInteractive(message, 'Some things was error')
+      bot.replyInteractive(message, 'Some things was error!')
     }
   })
 }
